@@ -24,6 +24,7 @@ const Product = ({ id, title, price, description, category, image }) => {
       category,
       image,
       hasPrime,
+      rating,
     };
 
     // Sending the product as an action to the REDUX store... the basket slice

@@ -56,6 +56,7 @@ const Checkout = () => {
                     displayType={'text'}
                     thousandSeparator={true}
                     prefix={'$'}
+                    decimalScale={2}
                   />
                 </span>
               </h2>
