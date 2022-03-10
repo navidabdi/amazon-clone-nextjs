@@ -5,7 +5,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addToBasket } from '../slices/basketSlice';
-
+import { useSelector } from 'react-redux';
+import { selectTheNumOfProductInBasket } from '../slices/basketSlice';
 const MAX_RATING = 5;
 const MIN_RATING = 1;
 const Product = ({ id, title, price, description, category, image }) => {
@@ -13,7 +14,7 @@ const Product = ({ id, title, price, description, category, image }) => {
     Math.floor(Math.random() * (MAX_RATING - MIN_RATING + 1)) + MIN_RATING
   );
   const [hasPrime] = useState(Math.random() < 0.5);
-
+  const TheNumOfProductInBasket = useSelector(selectTheNumOfProductInBasket);
   const dispatch = useDispatch();
   const addItemToBasket = () => {
     const product = {
@@ -54,7 +55,7 @@ const Product = ({ id, title, price, description, category, image }) => {
           prefix={'$'}
         />
         {hasPrime && (
-          <div className="flex items-center space-x-2 mt-5">
+          <div className="flex items-center space-x-2">
             <img
               className="w-12"
               src="https://links.papareact.com/fdw"
@@ -63,6 +64,8 @@ const Product = ({ id, title, price, description, category, image }) => {
             <p className="text-xs text-gray-500">FREE Next-day Delivery</p>
           </div>
         )}
+        <p>{TheNumOfProductInBasket.filter((i) => i === id).length}</p>
+        {console.log(TheNumOfProductInBasket)}
       </div>
       <button onClick={addItemToBasket} className="mt-auto button">
         Add to Basket
