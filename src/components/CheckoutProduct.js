@@ -35,10 +35,10 @@ const CheckoutProduct = ({
     dispatch(removeFromBasket({ id }));
   };
   return (
-    <div className="grid grid-cols-5">
+    <div className="grid md:grid-cols-5">
       <Image src={image} height={200} width={200} objectFit="contain" />
       {/* Middle */}
-      <div className="col-span-3 mx-5">
+      <div className=" md:col-span-3 md:mx-5">
         <p>{title}</p>
 
         <div className="flex">
@@ -56,7 +56,7 @@ const CheckoutProduct = ({
           prefix={'$'}
         />
         {hasPrime && (
-          <div className="flex items-center space-x-2 mt-2">
+          <div className="flex items-center space-x-2">
             <img
               loading="lazy"
               className="w-12"
@@ -68,11 +68,14 @@ const CheckoutProduct = ({
         )}
       </div>
 
-      <div className="flex flex-col space-y-2 my-auto justify-self-end">
-        <button onClick={addItemToBasket} className="mt-auto button">
+      <div className="flex justify-between space-x-2 md:flex-col md:space-y-2 md:space-x-0 my-auto md:justify-self-end">
+        <button onClick={addItemToBasket} className="mt-auto button flex-grow">
           Add to Basket
         </button>
-        <button onClick={removeItemFromBasket} className="mt-auto button">
+        <button
+          onClick={removeItemFromBasket}
+          className="mt-auto button flex-grow"
+        >
           Remove from Basket
         </button>
       </div>
