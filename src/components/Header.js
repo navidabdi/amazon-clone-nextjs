@@ -17,6 +17,7 @@ const Header = () => {
   return (
     <header>
       {/* Top Nav */}
+      {console.log(items)}
       <div className="flex items-center bg-amazon_blue p-1 flex-grow py-2">
         <div className="mt-2 flex flex-grow items-center sm:flex-grow-0">
           <Image

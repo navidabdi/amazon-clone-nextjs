@@ -16,7 +16,15 @@ const Product = ({ id, title, price, description, category, image }) => {
 
   const dispatch = useDispatch();
   const addItemToBasket = () => {
-    const product = { id, title, price, description, category, image };
+    const product = {
+      id,
+      title,
+      price,
+      description,
+      category,
+      image,
+      hasPrime,
+    };
 
     // Sending the product as an action to the REDUX store... the basket slice
     dispatch(addToBasket(product));
