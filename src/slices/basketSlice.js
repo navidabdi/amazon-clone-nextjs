@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   items: [],
-  CountProductInBasket: [],
+  countProduct: {},
+  cartItems: [],
 };
 
 export const basketSlice = createSlice({
@@ -11,21 +12,17 @@ export const basketSlice = createSlice({
   reducers: {
     // Actions
     addToBasket: (state, action) => {
-      const index = state.items.findIndex(
-        (basketItem) => basketItem.id === action.payload.id
-      );
-      if (index >= 0) {
-        let id = action.payload.id;
-        // So item exists in the basket then remove it...
+      state.items = [...state.items, action.payload];
 
-        state.CountProductInBasket = [
-          ...state.CountProductInBasket,
-          action.payload.id,
-        ];
-      } else {
-        state.items = [...state.items, action.payload];
-      }
-      console.log(state.CountProductInBasket);
+      const counts = {};
+
+      state.items.forEach(function (x) {
+        // console.log(x);
+        counts[x.id] = (counts[x.id] || 0) + 1;
+      });
+      state.countProduct = counts;
+      // console.log(state.countProduct);
+      // console.log(counts);
     },
     removeFromBasket: (state, action) => {
       const index = state.items.findIndex(
@@ -51,7 +48,7 @@ export const { addToBasket, removeFromBasket } = basketSlice.actions;
 export const selectItems = (state) => state.basket.items;
 export const selectTotal = (state) =>
   state.basket.items.reduce((total, item) => total + item.price, 0);
-export const selectTheNumOfProductInBasket = (state) =>
-  state.basket.CountProductInBasket;
+export const selectCountProduct = (state) => state.basket.countProduct;
+export const selectcartItems = (state) => state.basket.cartItems;
 
 export default basketSlice.reducer;

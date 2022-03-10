@@ -1,17 +1,28 @@
 import Header from '../components/Header';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
-import { selectItems, selectTotal } from '../slices/basketSlice';
+import {
+  selectItems,
+  selectTotal,
+  selectCountProduct,
+} from '../slices/basketSlice';
 import CheckoutProduct from '../components/CheckoutProduct';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import CurrencyFormat from 'react-currency-format';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe();
+
 const Checkout = () => {
   const items = useSelector(selectItems);
   const total = useSelector(selectTotal);
+  const countProduct = useSelector(selectCountProduct);
   const { data: session } = useSession();
+  const createCheckoutSession = () => {};
   return (
     <div className="bg-gray-100">
       <Header />
+      {console.log(countProduct)}
       <main className="lg:flex max-w-screen-2xl mx-auto">
         {/* Left */}
 
@@ -61,6 +72,8 @@ const Checkout = () => {
                 </span>
               </h2>
               <button
+                onClick={createCheckoutSession}
+                role="link"
                 disabled={!session}
                 className={`button mt-2 ${
                   !session &&
